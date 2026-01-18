@@ -1,26 +1,77 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;900&display=swap');
+
+@theme inline {
+  /* Colors */
+  --color-gold-light: #FBF7D3;
+  --color-gold: #FBDD97;
+  --color-gold-dark: #906F1E;
+  --color-gold-alt: #FEF8C5;
+  --color-brand-black: #000000;
+  --color-brand-white: #FFFFFF;
+
+  /* Font Family */
+  --font-sans: 'Albert Sans', sans-serif;
+
+  /* Border Radius */
+  --radius-card: 30px;
+  --radius-button: 25px;
+}
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Albert Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Gold Gradient Background */
+.gold-gradient {
+  background: linear-gradient(180deg, #FBF7D3 0%, #906F1E 50.481%, #FBDD97 100%);
+}
+
+/* Gold Text Gradient */
+.gold-text-gradient {
+  background: linear-gradient(180deg, #FEF8C5 0%, #906F1E 50.481%, #FBDD97 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section Pattern Background */
+.section-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-pattern::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  mix-blend-mode: luminosity;
+}
+
+/* Text Shadow Utility */
+.text-shadow {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Border Radius */
+.rounded-card {
+  border-radius: 30px;
+}
+
+.rounded-button {
+  border-radius: 25px;
 }
