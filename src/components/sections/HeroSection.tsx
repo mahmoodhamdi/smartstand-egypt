@@ -43,8 +43,10 @@ export const HeroSection: React.FC = () => {
       {/* Header */}
       <Header />
 
-      {/* Background Shape - Always visible */}
-      <div className="absolute inset-0 z-0">
+      {/* ════════════════════════════════════════════════════════════
+          WAVES/SHAPES - OUTSIDE AnimatePresence - ALWAYS STABLE
+          ════════════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-[1] pointer-events-none">
         <Image
           src="/images/shapes/main.svg"
           alt=""
@@ -54,11 +56,13 @@ export const HeroSection: React.FC = () => {
         />
       </div>
 
-      {/* Hero Image - FIXED FOR MOBILE */}
-      <div className="absolute inset-0 z-[1]">
+      {/* ════════════════════════════════════════════════════════════
+          SLIDE IMAGE - ONLY THIS ANIMATES
+          ════════════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-[2]">
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentSlide}
+            key={`image-${currentSlide}`}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -66,7 +70,7 @@ export const HeroSection: React.FC = () => {
             className="absolute inset-0"
           >
             {/* Mobile: Full background image with overlay */}
-            <div className="block md:hidden absolute inset-0">
+            <div className="block lg:hidden absolute inset-0">
               <Image
                 src={slides[currentSlide].image}
                 alt={slides[currentSlide].title}
@@ -76,42 +80,45 @@ export const HeroSection: React.FC = () => {
                 sizes="100vw"
               />
               {/* Dark overlay for text readability on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+              <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
             </div>
 
             {/* Desktop: Image on right side */}
-            <div className="hidden md:block absolute right-0 bottom-0 w-[50%] lg:w-[55%] h-[70%] lg:h-[80%]">
+            <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[55%] xl:w-[60%] h-[70%] xl:h-[80%]">
               <Image
                 src={slides[currentSlide].image}
                 alt={slides[currentSlide].title}
                 fill
                 priority
-                className="object-contain object-right-bottom"
-                sizes="(max-width: 1024px) 50vw, 55vw"
+                className="object-contain object-right"
+                sizes="60vw"
               />
             </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
-        <div className="w-full max-w-xl lg:max-w-2xl pt-20 sm:pt-24 pb-32 sm:pb-20">
+      {/* ════════════════════════════════════════════════════════════
+          TEXT CONTENT - ANIMATED SEPARATELY
+          ════════════════════════════════════════════════════════════ */}
+      <div className="relative z-[10] container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
+        <div className="w-full lg:w-[45%] xl:w-[40%] pt-24 sm:pt-28 pb-24 sm:pb-20">
           <AnimatePresence mode="wait">
             <motion.div
-              key={currentSlide}
+              key={`text-${currentSlide}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.5 }}
+              className="text-center lg:text-left"
             >
               {/* Subtitle */}
-              <p className="text-[#FBDD97] text-sm sm:text-base lg:text-lg mb-2 sm:mb-3">
+              <p className="text-[#FBDD97] text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
                 {slides[currentSlide].subtitle}
               </p>
 
               {/* Title */}
-              <h1 className="text-white font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight mb-6 sm:mb-8">
+              <h1 className="text-white font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl leading-tight mb-6 sm:mb-8">
                 {slides[currentSlide].title}
               </h1>
 
@@ -122,7 +129,7 @@ export const HeroSection: React.FC = () => {
                 onClick={() => {
                   document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="gold-gradient text-white font-bold text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4 rounded-[25px] shadow-lg w-full sm:w-auto"
+                className="gold-gradient text-white font-bold text-base sm:text-lg px-8 sm:px-10 py-3 sm:py-4 rounded-full shadow-lg w-full sm:w-auto"
               >
                 Let&apos;s Get Started
               </motion.button>
@@ -131,8 +138,10 @@ export const HeroSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Slide Indicators - Bottom center */}
-      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-20 flex gap-2 sm:gap-3">
+      {/* ════════════════════════════════════════════════════════════
+          INDICATORS - STABLE, OUTSIDE ANIMATION
+          ════════════════════════════════════════════════════════════ */}
+      <div className="absolute bottom-8 sm:bottom-12 left-1/2 -translate-x-1/2 z-[20] flex items-center gap-2 sm:gap-3">
         {slides.map((_, index) => (
           <motion.button
             key={index}
