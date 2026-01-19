@@ -34,31 +34,31 @@ export const SERVICES: Service[] = [
     id: "1",
     title: "Floorstands",
     description: "Our floorstands are designed to provide an attractive and effective way to showcase products and attract customers' attention. We offer a range of customizable options to ensure that our floorstands meet the unique needs and requirements of our clients.",
-    icon: "/images/services/locker1.svg",
+    icon: "/images/services/floorstands.webp",
   },
   {
     id: "2",
     title: "Booths",
     description: "Our customized booth design and construction services create functional and visually appealing exhibition booths that effectively showcase your brand and products. Our team of experts works closely with our clients to understand their specific requirements.",
-    icon: "/images/services/locker2.svg",
+    icon: "/images/services/booths.webp",
   },
   {
     id: "3",
     title: "Lockers",
     description: "Our lockers provide a safe and secure way for customers to store their belongings while shopping. We offer a range of customizable options to ensure that our lockers meet the unique needs and requirements of our clients.",
-    icon: "/images/services/locker3.svg",
+    icon: "/images/services/lockers.webp",
   },
   {
     id: "4",
     title: "Store Racks",
     description: "Our store racks are designed to maximize space and enhance product visibility. We offer a range of customizable options to ensure that our store racks meet the unique needs and requirements of our clients.",
-    icon: "/images/services/locker1.svg",
+    icon: "/images/services/store-racks.webp",
   },
   {
     id: "5",
     title: "Countertops",
     description: "Our countertops provide an attractive and functional space for product displays and customer service. We offer a range of customizable options to ensure that our countertops meet the unique needs and requirements of our clients.",
-    icon: "/images/services/locker2.svg",
+    icon: "/images/services/countertops.webp",
   },
 ];
 

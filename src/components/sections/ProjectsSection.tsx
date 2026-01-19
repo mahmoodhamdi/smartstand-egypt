@@ -17,7 +17,7 @@ export const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-16 lg:py-24 overflow-hidden bg-[#0D0D0D]">
+    <section id="projects" className="relative py-16 lg:py-24 overflow-x-hidden bg-[#0D0D0D]">
       {/* Background Layers */}
       <div className="absolute inset-0">
         {/* Gold Shape Background */}
