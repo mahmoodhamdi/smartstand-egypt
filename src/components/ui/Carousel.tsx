@@ -112,21 +112,25 @@ export const Carousel: React.FC<CarouselProps> = ({ children, className }) => {
       </div>
 
       {/* Dot Indicators */}
-      <div className="flex justify-center mt-6 gap-2">
+      <div className="flex justify-center mt-6 gap-1">
         {children.map((_, index) => (
           <motion.button
             key={index}
             onClick={() => handleDotClick(index)}
-            className={cn(
-              "rounded-full transition-all duration-300",
-              index === activeIndex
-                ? "w-8 h-3 gold-gradient"
-                : "w-3 h-3 bg-white/50 hover:bg-white/70"
-            )}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
+            className="p-2 min-w-[44px] min-h-[44px] flex items-center justify-center"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
             aria-label={`Go to slide ${index + 1}`}
-          />
+          >
+            <span
+              className={cn(
+                "rounded-full transition-all duration-300 block",
+                index === activeIndex
+                  ? "w-8 h-3 gold-gradient"
+                  : "w-3 h-3 bg-white/50 hover:bg-white/70"
+              )}
+            />
+          </motion.button>
         ))}
       </div>
     </div>
