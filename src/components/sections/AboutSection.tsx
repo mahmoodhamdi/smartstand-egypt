@@ -47,7 +47,7 @@ export const AboutSection: React.FC = () => {
             className="relative w-full h-[300px] lg:h-[452px] rounded-card overflow-hidden"
           >
             <Image
-              src="/images/about/about-image.png"
+              src="/images/about/about-image.webp"
               alt="About Smart Stand Egypt"
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
@@ -65,7 +65,7 @@ export const AboutSection: React.FC = () => {
             className="space-y-6"
           >
             <div className="text-black font-bold text-sm lg:text-base leading-relaxed whitespace-pre-line">
-              {COMPANY_INFO.description}
+              {COMPANY_INFO.fullDescription}
             </div>
 
             {/* CTA Button */}

@@ -32,7 +32,7 @@ export const CapabilitiesSection: React.FC = () => {
         >
           <SectionTitle
             title="Capabilities"
-            subtitle="Smart Stand is a leading provider of a wide range of services"
+            subtitle="Our advanced manufacturing capabilities for exceptional results"
             className="mb-12 lg:mb-16"
           />
         </motion.div>

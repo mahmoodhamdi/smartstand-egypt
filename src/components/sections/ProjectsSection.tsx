@@ -52,7 +52,7 @@ export const ProjectsSection: React.FC = () => {
         >
           <SectionTitle
             title="Projects"
-            subtitle="Smart Stand is a leading provider of a wide range of services"
+            subtitle="Showcasing our work with leading brands across the globe"
             variant="light"
             className="mb-12 lg:mb-16"
           />
