@@ -34,16 +34,13 @@ export const Header: React.FC = () => {
       )}
     >
       <div className="flex items-center justify-between">
-        {/* Logo - Using downloaded image */}
+        {/* Logo */}
         <Link href="#home" className="flex-shrink-0">
-          <Image
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
             src="/images/logo/Logo.svg"
             alt="Smart Stand Egypt"
-            width={294}
-            height={57}
             className="h-10 sm:h-12 lg:h-14 w-auto"
-            priority
-            unoptimized
           />
         </Link>
 
