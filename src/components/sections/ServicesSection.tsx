@@ -39,12 +39,11 @@ const services = [
   },
 ];
 
-const cardVariants = ["edge", "side", "main", "side", "edge"] as const;
-
 export const ServicesSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(2);
+  const [activeIndex, setActiveIndex] = useState(2); // Start with middle card
 
+  // Update active index based on scroll position
   const handleScroll = useCallback(() => {
     if (!scrollRef.current) return;
 
@@ -69,6 +68,7 @@ export const ServicesSection: React.FC = () => {
     setActiveIndex(closestIndex);
   }, []);
 
+  // Scroll to a specific card
   const scrollToCard = useCallback((index: number) => {
     if (!scrollRef.current) return;
 
@@ -86,8 +86,11 @@ export const ServicesSection: React.FC = () => {
         behavior: "smooth",
       });
     }
+
+    setActiveIndex(index);
   }, []);
 
+  // Initial scroll to center
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
@@ -133,26 +136,26 @@ export const ServicesSection: React.FC = () => {
           <div
             ref={scrollRef}
             className={cn(
-              "flex items-end gap-4 sm:gap-5 lg:gap-6",
+              "flex items-center justify-start gap-4 sm:gap-5 lg:gap-6",
               "overflow-x-auto scrollbar-hide scroll-smooth",
               "snap-x snap-mandatory",
               "pb-8"
             )}
             style={{
-              paddingLeft: "max(16px, calc(50vw - 600px))",
-              paddingRight: "max(16px, calc(50vw - 600px))",
+              paddingLeft: "max(16px, calc(50vw - 700px))",
+              paddingRight: "max(16px, calc(50vw - 700px))",
             }}
           >
             {services.map((service, index) => (
               <div
                 key={service.id}
                 className="snap-center flex-shrink-0"
+                onClick={() => scrollToCard(index)}
               >
                 <ServiceCard
                   title={service.title}
                   description={service.description}
                   icon={service.icon}
-                  variant={cardVariants[index]}
                   isActive={activeIndex === index}
                 />
               </div>

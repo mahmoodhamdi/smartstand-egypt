@@ -8,104 +8,71 @@ import { cn } from "@/lib/utils";
 interface ProjectCardProps {
   title: string;
   image: string;
-  variant?: "main" | "side" | "edge";
   isActive?: boolean;
   className?: string;
 }
 
-// Responsive card configurations
-const cardConfig = {
-  main: {
-    container: cn(
-      // Mobile → Tablet → Desktop
-      "w-[260px] h-[340px]",
-      "sm:w-[300px] sm:h-[380px]",
-      "md:w-[340px] md:h-[420px]",
-      "lg:w-[380px] lg:h-[460px]",
-      "xl:w-[400px] xl:h-[480px]"
-    ),
-    imageHeight: "h-[55%]",
-    bg: "bg-white",
-    titleColor: "text-black",
-    buttonClass: "gold-gradient text-white",
-    titleSize: "text-xl sm:text-2xl md:text-3xl lg:text-4xl",
-  },
-  side: {
-    container: cn(
-      "w-[220px] h-[300px]",
-      "sm:w-[250px] sm:h-[340px]",
-      "md:w-[280px] md:h-[380px]",
-      "lg:w-[300px] lg:h-[400px]",
-      "xl:w-[320px] xl:h-[420px]"
-    ),
-    imageHeight: "h-[55%]",
-    bg: "bg-black",
-    titleColor: "gold-text-gradient",
-    buttonClass: "bg-white text-black hover:bg-gray-100",
-    titleSize: "text-lg sm:text-xl md:text-2xl lg:text-[28px]",
-  },
-  edge: {
-    container: cn(
-      "w-[180px] h-[260px]",
-      "sm:w-[200px] sm:h-[290px]",
-      "md:w-[220px] md:h-[320px]",
-      "lg:w-[240px] lg:h-[340px]",
-      "xl:w-[260px] xl:h-[360px]"
-    ),
-    imageHeight: "h-[55%]",
-    bg: "bg-black",
-    titleColor: "gold-text-gradient",
-    buttonClass: "bg-white text-black hover:bg-gray-100",
-    titleSize: "text-base sm:text-lg md:text-xl lg:text-2xl",
-  },
-};
-
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   image,
-  variant = "main",
   isActive = false,
   className,
 }) => {
-  const config = cardConfig[variant];
-
-  const handleClick = () => {
-    document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <motion.div
-      whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
-      transition={{ duration: 0.3 }}
+      layout
+      animate={{
+        scale: isActive ? 1 : 0.9,
+        opacity: isActive ? 1 : 0.85,
+      }}
+      whileHover={{ scale: isActive ? 1.02 : 0.95, opacity: 1 }}
+      transition={{
+        layout: { duration: 0.4, ease: "easeInOut" },
+        scale: { duration: 0.3 },
+        opacity: { duration: 0.3 }
+      }}
       className={cn(
+        // Base styles
         "rounded-[24px] sm:rounded-[28px] lg:rounded-[30px]",
-        "flex flex-col overflow-hidden",
+        "overflow-hidden flex flex-col",
         "flex-shrink-0 transition-all duration-300",
-        config.container,
-        config.bg,
-        isActive && "ring-2 ring-[#FBDD97]/50",
+        "cursor-pointer",
+
+        // Size - Active is larger
+        isActive
+          ? "w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] lg:w-[360px] lg:h-[460px]"
+          : "w-[220px] h-[320px] sm:w-[250px] sm:h-[360px] lg:w-[280px] lg:h-[400px]",
+
+        // Background - Active is white, others black
+        isActive
+          ? "bg-white shadow-2xl"
+          : "bg-black border border-white/10",
+
         className
       )}
     >
       {/* Image */}
-      <div className={cn("relative w-full flex-shrink-0", config.imageHeight)}>
+      <div className={cn(
+        "relative w-full",
+        isActive ? "h-[55%]" : "h-[50%]"
+      )}>
         <Image
           src={image}
           alt={title}
           fill
-          sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 400px"
           className="object-cover"
-          loading="lazy"
+          sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
         />
       </div>
 
       {/* Content */}
-      <div className="flex flex-col items-center justify-center flex-1 p-3 sm:p-4 lg:p-5">
+      <div className="flex flex-col items-center justify-center flex-1 p-4 sm:p-5">
         <h3
           className={cn(
-            "font-black text-center mb-2 sm:mb-3 leading-tight",
-            config.titleSize,
-            config.titleColor
+            "font-black text-center mb-4 leading-tight",
+            isActive
+              ? "text-xl sm:text-2xl lg:text-3xl text-black"
+              : "text-lg sm:text-xl lg:text-2xl text-white"
           )}
         >
           {title}
@@ -114,13 +81,18 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          onClick={handleClick}
+          onClick={(e) => {
+            e.stopPropagation();
+            document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
+          }}
           className={cn(
             "font-bold rounded-[20px] sm:rounded-[25px] transition-all",
-            "min-h-[36px] sm:min-h-[40px] lg:min-h-[44px]",
-            "px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5",
-            "text-xs sm:text-sm lg:text-base",
-            config.buttonClass
+            "min-h-[40px] sm:min-h-[44px] lg:min-h-[48px]",
+            "px-5 sm:px-6 lg:px-8 py-2 sm:py-2.5",
+            "text-sm sm:text-base",
+            isActive
+              ? "gold-gradient text-white shadow-lg"
+              : "bg-white text-black hover:bg-gray-100"
           )}
         >
           Learn More

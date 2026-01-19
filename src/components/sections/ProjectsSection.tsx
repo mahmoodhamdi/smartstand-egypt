@@ -14,8 +14,6 @@ const projects = [
   { id: "5", title: "Abdullah Al-Othaim Markets", image: "/images/projects/othaim.webp" },
 ];
 
-const cardVariants = ["edge", "side", "main", "side", "edge"] as const;
-
 export const ProjectsSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(2);
@@ -61,6 +59,8 @@ export const ProjectsSection: React.FC = () => {
         behavior: "smooth",
       });
     }
+
+    setActiveIndex(index);
   }, []);
 
   useEffect(() => {
@@ -108,25 +108,25 @@ export const ProjectsSection: React.FC = () => {
           <div
             ref={scrollRef}
             className={cn(
-              "flex items-end gap-4 sm:gap-5 lg:gap-6",
+              "flex items-center justify-start gap-4 sm:gap-5 lg:gap-6",
               "overflow-x-auto scrollbar-hide scroll-smooth",
               "snap-x snap-mandatory",
               "pb-8"
             )}
             style={{
-              paddingLeft: "max(16px, calc(50vw - 600px))",
-              paddingRight: "max(16px, calc(50vw - 600px))",
+              paddingLeft: "max(16px, calc(50vw - 700px))",
+              paddingRight: "max(16px, calc(50vw - 700px))",
             }}
           >
             {projects.map((project, index) => (
               <div
                 key={project.id}
                 className="snap-center flex-shrink-0"
+                onClick={() => scrollToCard(index)}
               >
                 <ProjectCard
                   title={project.title}
                   image={project.image}
-                  variant={cardVariants[index]}
                   isActive={activeIndex === index}
                 />
               </div>
