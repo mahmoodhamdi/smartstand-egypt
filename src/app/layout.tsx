@@ -1,5 +1,15 @@
 import type { Metadata, Viewport } from "next";
+import { Albert_Sans } from "next/font/google";
 import "./globals.css";
+
+// Use Next.js font optimization - prevents render-blocking
+const albertSans = Albert_Sans({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  display: "swap",
+  variable: "--font-albert-sans",
+  preload: true,
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://smartstand-egypt.vercel.app'),
@@ -79,8 +89,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={albertSans.variable}>
       <head>
+        {/* Preconnect for faster resource loading */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Preload critical images for LCP */}
+        <link rel="preload" as="image" href="/images/shapes/main.svg" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -108,7 +123,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className={`${albertSans.className} antialiased`}>{children}</body>
     </html>
   );
 }

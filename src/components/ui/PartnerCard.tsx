@@ -16,7 +16,7 @@ export const PartnerCard: React.FC<PartnerCardProps> = ({
   return (
     <div
       className={cn(
-        "bg-white border-2 border-black rounded-card w-[272px] h-[133px] flex items-center justify-center p-4",
+        "bg-white border-2 border-black rounded-card w-[140px] sm:w-[180px] lg:w-[272px] h-[70px] sm:h-[90px] lg:h-[133px] flex items-center justify-center p-2 sm:p-3 lg:p-4",
         className
       )}
     >
@@ -25,7 +25,9 @@ export const PartnerCard: React.FC<PartnerCardProps> = ({
         alt={name}
         width={180}
         height={90}
-        className="object-contain"
+        sizes="(max-width: 640px) 120px, (max-width: 1024px) 150px, 180px"
+        className="object-contain w-[100px] sm:w-[130px] lg:w-[180px] h-auto"
+        loading="lazy"
       />
     </div>
   );

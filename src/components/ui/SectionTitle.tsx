@@ -17,12 +17,12 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   const textColor = variant === "dark" ? "text-black" : "text-white";
 
   return (
-    <div className={cn("text-center", className)}>
-      <h2 className={cn("font-black text-4xl md:text-5xl lg:text-6xl mb-2", textColor)}>
+    <div className={cn("text-center px-4", className)}>
+      <h2 className={cn("font-black text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-2", textColor)}>
         {title}
       </h2>
       {subtitle && (
-        <p className={cn("font-black text-base", textColor)}>
+        <p className={cn("font-black text-xs sm:text-sm md:text-base", textColor)}>
           {subtitle}
         </p>
       )}

@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500;600;700;900&display=swap');
 @import "tailwindcss";
+
+/* Font is loaded via Next.js font optimization in layout.tsx - DO NOT add @import for fonts */
 
 @theme inline {
   /* Colors */
@@ -9,9 +10,10 @@
   --color-gold-alt: #FEF8C5;
   --color-brand-black: #000000;
   --color-brand-white: #FFFFFF;
+  --color-dark-bg: #0D0D0D;
 
-  /* Font Family */
-  --font-sans: 'Albert Sans', sans-serif;
+  /* Font Family - Uses CSS variable from Next.js font optimization */
+  --font-sans: var(--font-albert-sans), 'Albert Sans', sans-serif;
 
   /* Border Radius */
   --radius-card: 30px;
@@ -30,12 +32,12 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: 'Albert Sans', sans-serif;
+  font-family: var(--font-albert-sans), 'Albert Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Gold Gradient Background */
+/* Gold Gradient Background - Exact Figma colors */
 .gold-gradient {
   background: linear-gradient(180deg, #FBF7D3 0%, #906F1E 50.481%, #FBDD97 100%);
 }
@@ -46,6 +48,30 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* Dark Section Background */
+.dark-section {
+  background-color: #0D0D0D;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold Shape Overlay for dark sections */
+.gold-shape-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(144, 111, 30, 0.3) 50%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Pattern Overlay */
+.pattern-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0.15;
+  mix-blend-mode: luminosity;
+  pointer-events: none;
 }
 
 /* Section Pattern Background */
@@ -84,6 +110,26 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Slider Dots */
+.slider-dot {
+  transition: all 0.3s ease;
+}
+
+.slider-dot.active {
+  width: 32px;
+  background: linear-gradient(180deg, #FBF7D3 0%, #906F1E 50.481%, #FBDD97 100%);
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 /* Reduced motion preference */

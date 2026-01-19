@@ -16,17 +16,17 @@ export const CapabilityCard: React.FC<CapabilityCardProps> = ({
   return (
     <div
       className={cn(
-        "bg-white border-2 border-black rounded-card p-6 w-full max-w-[502px] h-[215px] flex flex-col",
+        "bg-white border-2 border-black rounded-card p-4 sm:p-6 w-full h-auto min-h-[160px] sm:min-h-[180px] lg:h-[215px] flex flex-col card-hover",
         className
       )}
     >
       {/* Title Button */}
-      <Button variant="gold" size="md" className="self-center mb-4">
+      <Button variant="gold" size="md" className="self-center mb-3 sm:mb-4">
         {title}
       </Button>
 
       {/* Description */}
-      <p className="text-black text-center text-base font-black">
+      <p className="text-black text-center text-xs sm:text-sm lg:text-base font-bold leading-relaxed flex-1">
         {description}
       </p>
     </div>

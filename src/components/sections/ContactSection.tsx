@@ -1,48 +1,92 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { SectionTitle, ContactForm, SocialIcons } from "@/components/ui";
 import { CONTACT_INFO } from "@/lib/constants";
 
 export const ContactSection: React.FC = () => {
   return (
-    <section id="contact" className="relative py-16 lg:py-20 overflow-hidden bg-black">
-      {/* Background Pattern */}
+    <section id="contact" className="relative py-16 lg:py-24 overflow-hidden bg-[#0D0D0D]">
+      {/* Background Layers */}
       <div className="absolute inset-0">
+        {/* Gold Shape Background */}
         <Image
           src="/images/shapes/main.svg"
           alt=""
           fill
+          sizes="100vw"
           className="object-cover"
+          loading="lazy"
         />
+        {/* Pattern Overlay */}
+        <div className="absolute inset-0 opacity-20 mix-blend-luminosity">
+          <Image
+            src="/images/shapes/vector1.svg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+            loading="lazy"
+          />
+        </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-6 lg:px-[100px]">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-[100px]">
         {/* Section Header */}
-        <SectionTitle
-          title="Contact us"
-          variant="light"
-          className="mb-12"
-        />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <SectionTitle
+            title="Contact us"
+            variant="light"
+            className="mb-12 lg:mb-16"
+          />
+        </motion.div>
 
-        {/* Content Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
+        {/* Content Grid - stacks vertically on mobile */}
+        <div className="flex flex-col lg:grid lg:grid-cols-3 gap-6 lg:gap-8 items-start">
           {/* Person Image */}
-          <div className="hidden lg:block relative w-full max-w-[365px] h-[498px] rounded-card overflow-hidden mx-auto">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="hidden lg:block relative w-full max-w-[365px] h-[498px] rounded-card overflow-hidden mx-auto"
+          >
             <Image
               src="/images/contact/person.svg"
-              alt="Contact"
+              alt="Contact representative"
               fill
+              sizes="365px"
               className="object-cover"
+              loading="lazy"
             />
-          </div>
+          </motion.div>
 
           {/* Contact Form */}
-          <div className="flex justify-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex justify-center"
+          >
             <ContactForm />
-          </div>
+          </motion.div>
 
-          {/* Contact Info */}
-          <div className="space-y-6 lg:space-y-8">
+          {/* Contact Info - shows first on mobile */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="space-y-4 sm:space-y-6 lg:space-y-8 order-first lg:order-none"
+          >
             {/* Email */}
             <div className="flex items-start gap-4">
               <Image
@@ -94,7 +138,7 @@ export const ContactSection: React.FC = () => {
             <div className="pt-4 lg:pt-8">
               <SocialIcons />
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
