@@ -44,22 +44,9 @@ export const HeroSection: React.FC = () => {
       <Header />
 
       {/* ════════════════════════════════════════════════════════════
-          WAVES/SHAPES - OUTSIDE AnimatePresence - ALWAYS STABLE
+          SLIDE IMAGE - BEHIND WAVES (lowest z-index)
           ════════════════════════════════════════════════════════════ */}
-      <div className="absolute inset-0 z-[1] pointer-events-none">
-        <Image
-          src="/images/shapes/main.svg"
-          alt=""
-          fill
-          className="object-cover"
-          priority
-        />
-      </div>
-
-      {/* ════════════════════════════════════════════════════════════
-          SLIDE IMAGE - ONLY THIS ANIMATES
-          ════════════════════════════════════════════════════════════ */}
-      <div className="absolute inset-0 z-[2]">
+      <div className="absolute inset-0 z-[1]">
         <AnimatePresence mode="wait">
           <motion.div
             key={`image-${currentSlide}`}
@@ -99,7 +86,20 @@ export const HeroSection: React.FC = () => {
       </div>
 
       {/* ════════════════════════════════════════════════════════════
-          TEXT CONTENT - ANIMATED SEPARATELY
+          WAVES/SHAPES - ABOVE IMAGES (higher z-index)
+          ════════════════════════════════════════════════════════════ */}
+      <div className="absolute inset-0 z-[5] pointer-events-none">
+        <Image
+          src="/images/shapes/main.svg"
+          alt=""
+          fill
+          className="object-cover"
+          priority
+        />
+      </div>
+
+      {/* ════════════════════════════════════════════════════════════
+          TEXT CONTENT - ANIMATED SEPARATELY (highest z-index)
           ════════════════════════════════════════════════════════════ */}
       <div className="relative z-[10] container mx-auto px-4 sm:px-6 lg:px-8 min-h-screen flex items-center">
         <div className="w-full lg:w-[45%] xl:w-[40%] pt-24 sm:pt-28 pb-24 sm:pb-20">
