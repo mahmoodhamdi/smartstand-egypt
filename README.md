@@ -4,7 +4,9 @@ A modern, responsive landing page for **Smart Stand Egypt** - a marketing soluti
 
 ## Live Demo
 
-Deploy to Vercel: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mahmoodhamdi/smartstand-egypt)
+**Live Site**: https://smartstand-egypt.vercel.app
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/mahmoodhamdi/smartstand-egypt)
 
 ## Tech Stack
 
