@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useId } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -8,9 +8,9 @@ interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement
 }
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ className, label, id: providedId, ...props }, ref) => {
-    const generatedId = useId();
-    const textareaId = providedId || `textarea-${generatedId}`;
+  ({ className, label, id, name, ...props }, ref) => {
+    // Use provided id, or generate from name, or use a fallback
+    const textareaId = id || (name ? `textarea-${name}` : undefined);
 
     return (
       <div className="w-full">
@@ -26,6 +26,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           <textarea
             ref={ref}
             id={textareaId}
+            name={name}
             className={cn(
               "w-full bg-transparent text-white outline-none resize-none placeholder:text-white/50",
               className
