@@ -39,10 +39,11 @@ export const Header: React.FC = () => {
           <Image
             src="/images/logo/Logo.svg"
             alt="Smart Stand Egypt"
-            width={200}
-            height={60}
+            width={294}
+            height={57}
             className="h-10 sm:h-12 lg:h-14 w-auto"
             priority
+            unoptimized
           />
         </Link>
 
