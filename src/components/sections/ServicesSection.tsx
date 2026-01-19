@@ -3,10 +3,19 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { SectionTitle, ServiceCard, SliderDots } from "@/components/ui";
+import { SectionTitle, ServiceCard } from "@/components/ui";
+import { Carousel } from "@/components/ui/Carousel";
 import { SERVICES } from "@/lib/constants";
 
 export const ServicesSection: React.FC = () => {
+  // Determine card variant based on position
+  // 0=edge, 1=side, 2=main, 3=side, 4=edge
+  const getVariant = (index: number): "main" | "side" | "edge" => {
+    if (index === 2) return "main";
+    if (index === 1 || index === 3) return "side";
+    return "edge";
+  };
+
   return (
     <section id="services" className="relative py-16 lg:py-24 overflow-hidden bg-[#0D0D0D]">
       {/* Background Layers */}
@@ -49,39 +58,25 @@ export const ServicesSection: React.FC = () => {
           />
         </motion.div>
 
-        {/* Services Carousel - Horizontal scroll with snap */}
-        <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth">
-          <div className="flex gap-3 sm:gap-4 lg:gap-6 items-end justify-start lg:justify-center px-4 sm:px-6 lg:px-[100px] min-w-max pb-6">
-            {SERVICES.slice(0, 5).map((service, index) => {
-              // Determine card variant based on position
-              // 0=edge, 1=side, 2=main, 3=side, 4=edge
-              const variant = index === 2 ? "main" : (index === 1 || index === 3) ? "side" : "edge";
-
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex-shrink-0 snap-center"
-                >
-                  <ServiceCard
-                    title={service.title}
-                    description={service.description}
-                    icon={service.icon}
-                    variant={variant}
-                  />
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Slider Dots */}
-        <div className="mt-8 lg:mt-12">
-          <SliderDots total={3} active={0} />
-        </div>
+        {/* Services Carousel with synced dots */}
+        <Carousel>
+          {SERVICES.slice(0, 5).map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ServiceCard
+                title={service.title}
+                description={service.description}
+                icon={service.icon}
+                variant={getVariant(index)}
+              />
+            </motion.div>
+          ))}
+        </Carousel>
       </div>
     </section>
   );

@@ -11,3 +11,4 @@ export { ContactForm } from "./ContactForm";
 export { SocialIcons } from "./SocialIcons";
 export { AnimatedSection } from "./AnimatedSection";
 export { SliderDots } from "./SliderDots";
+export { Carousel } from "./Carousel";

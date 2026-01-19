@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
+import { scrollToContact } from "@/lib/smoothScroll";
 
 interface ProjectCardProps {
   title: string;
@@ -75,6 +76,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
         <Button
           variant={variant === "main" ? "gold" : "white"}
           size={variant === "edge" ? "sm" : "md"}
+          onClick={scrollToContact}
         >
           Learn More
         </Button>

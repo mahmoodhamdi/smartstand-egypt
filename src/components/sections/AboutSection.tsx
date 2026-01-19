@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionTitle, Button } from "@/components/ui";
 import { COMPANY_INFO } from "@/lib/constants";
+import { scrollToContact } from "@/lib/smoothScroll";
 
 export const AboutSection: React.FC = () => {
   return (
@@ -68,7 +69,7 @@ export const AboutSection: React.FC = () => {
             </div>
 
             {/* CTA Button */}
-            <Button variant="gold" size="lg">
+            <Button variant="gold" size="lg" onClick={scrollToContact}>
               Contact Us Now
             </Button>
           </motion.div>

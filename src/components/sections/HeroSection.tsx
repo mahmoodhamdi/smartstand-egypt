@@ -7,6 +7,7 @@ import { Header } from "@/components/layout/Header";
 import { Button } from "@/components/ui";
 import { SliderDots } from "@/components/ui/SliderDots";
 import { COMPANY_INFO } from "@/lib/constants";
+import { scrollToContact } from "@/lib/smoothScroll";
 
 export const HeroSection: React.FC = () => {
   return (
@@ -58,7 +59,12 @@ export const HeroSection: React.FC = () => {
           </h1>
 
           {/* CTA Button */}
-          <Button variant="gold" size="lg" className="w-full sm:w-auto">
+          <Button
+            variant="gold"
+            size="lg"
+            className="w-full sm:w-auto"
+            onClick={scrollToContact}
+          >
             Let&apos;s Get Started
           </Button>
         </motion.div>

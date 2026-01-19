@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { SectionTitle, CapabilityCard, Button } from "@/components/ui";
 import { CAPABILITIES } from "@/lib/constants";
+import { scrollToContact } from "@/lib/smoothScroll";
 
 export const CapabilitiesSection: React.FC = () => {
   return (
@@ -73,7 +74,7 @@ export const CapabilitiesSection: React.FC = () => {
               </p>
             </div>
 
-            <Button variant="gold" size="lg" className="flex-shrink-0 w-full sm:w-auto">
+            <Button variant="gold" size="lg" className="flex-shrink-0 w-full sm:w-auto" onClick={scrollToContact}>
               Contact Us Now
             </Button>
           </div>

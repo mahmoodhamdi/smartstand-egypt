@@ -120,9 +120,9 @@ export const CONTACT_INFO: ContactInfo = {
 };
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "Facebook", url: "#", icon: "/images/icons/facebook.png" },
-  { platform: "Instagram", url: "#", icon: "/images/icons/instagram.png" },
-  { platform: "LinkedIn", url: "#", icon: "/images/icons/linkedin.png" },
+  { platform: "Facebook", url: "https://facebook.com/smartstandegypt", icon: "/images/icons/facebook.png" },
+  { platform: "Instagram", url: "https://instagram.com/smartstandegypt", icon: "/images/icons/instagram.png" },
+  { platform: "LinkedIn", url: "https://linkedin.com/company/smartstandegypt", icon: "/images/icons/linkedin.png" },
 ];
 
 export const ASSETS = {

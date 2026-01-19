@@ -3,10 +3,19 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { SectionTitle, ProjectCard, SliderDots } from "@/components/ui";
+import { SectionTitle, ProjectCard } from "@/components/ui";
+import { Carousel } from "@/components/ui/Carousel";
 import { PROJECTS } from "@/lib/constants";
 
 export const ProjectsSection: React.FC = () => {
+  // Determine card variant based on position
+  // 0=edge, 1=side, 2=main, 3=side, 4=edge
+  const getVariant = (index: number): "main" | "side" | "edge" => {
+    if (index === 2) return "main";
+    if (index === 1 || index === 3) return "side";
+    return "edge";
+  };
+
   return (
     <section id="projects" className="relative py-16 lg:py-24 overflow-hidden bg-[#0D0D0D]">
       {/* Background Layers */}
@@ -49,38 +58,24 @@ export const ProjectsSection: React.FC = () => {
           />
         </motion.div>
 
-        {/* Projects Carousel - Horizontal scroll with snap */}
-        <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory scroll-smooth">
-          <div className="flex gap-3 sm:gap-4 lg:gap-6 items-end justify-start lg:justify-center px-4 sm:px-6 lg:px-[100px] min-w-max pb-6">
-            {PROJECTS.map((project, index) => {
-              // Determine card variant based on position
-              // 0=edge, 1=side, 2=main, 3=side, 4=edge
-              const variant = index === 2 ? "main" : (index === 1 || index === 3) ? "side" : "edge";
-
-              return (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="flex-shrink-0 snap-center"
-                >
-                  <ProjectCard
-                    title={project.title}
-                    image={project.image}
-                    variant={variant}
-                  />
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Slider Dots */}
-        <div className="mt-8 lg:mt-12">
-          <SliderDots total={3} active={0} />
-        </div>
+        {/* Projects Carousel with synced dots */}
+        <Carousel>
+          {PROJECTS.map((project, index) => (
+            <motion.div
+              key={project.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <ProjectCard
+                title={project.title}
+                image={project.image}
+                variant={getVariant(index)}
+              />
+            </motion.div>
+          ))}
+        </Carousel>
       </div>
     </section>
   );
