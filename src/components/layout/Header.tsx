@@ -37,7 +37,7 @@ export const Header: React.FC = () => {
         {/* Logo - Using downloaded image */}
         <Link href="#home" className="flex-shrink-0">
           <Image
-            src="/images/logo/smart-stand-logo.webp"
+            src="/images/logo/Logo.svg"
             alt="Smart Stand Egypt"
             width={200}
             height={60}

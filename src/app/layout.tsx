@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     description: "Pioneering marketing solutions for businesses across the globe.",
     images: [
       {
-        url: "/images/logo/logo-full.svg",
+        url: "/images/logo/Logo.svg",
         width: 294,
         height: 57,
         alt: "Smart Stand Egypt Logo",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Smart Stand Egypt - Marketing Solutions",
     description: "Pioneering marketing solutions for businesses across the globe.",
-    images: ["/images/logo/logo-full.svg"],
+    images: ["/images/logo/Logo.svg"],
   },
 
   robots: {
@@ -104,7 +104,7 @@ export default function RootLayout({
               "@type": "Organization",
               name: "Smart Stand Egypt",
               url: "https://smartstand-egypt.vercel.app",
-              logo: "https://smartstand-egypt.vercel.app/images/logo/logo-full.svg",
+              logo: "https://smartstand-egypt.vercel.app/images/logo/Logo.svg",
               description: "Marketing solutions company in Egypt providing effective promotional strategies",
               address: {
                 "@type": "PostalAddress",
