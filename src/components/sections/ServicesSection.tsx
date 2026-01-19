@@ -108,17 +108,19 @@ export const ServicesSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Cards Carousel - FIXED PADDING */}
+        {/* Cards Carousel */}
         <div className="relative">
           <div
             ref={scrollRef}
             className={cn(
               "flex items-end gap-4 sm:gap-5 lg:gap-6",
               "overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory",
-              // KEY FIX: Add horizontal padding to show edge cards fully
-              "px-[calc(50vw-140px)] sm:px-[calc(50vw-160px)] md:px-[calc(50vw-180px)] lg:px-[calc(50vw-200px)]",
               "pb-8"
             )}
+            style={{
+              paddingLeft: "max(1rem, calc(50vw - 700px))",
+              paddingRight: "max(1rem, calc(50vw - 700px))",
+            }}
           >
             {SERVICES.slice(0, 5).map((service, index) => (
               <motion.div
