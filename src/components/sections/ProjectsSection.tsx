@@ -29,8 +29,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Projects Carousel */}
         <div
-          className="flex gap-4 lg:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory items-end justify-start lg:justify-center"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          className="flex gap-4 lg:gap-6 overflow-x-auto pb-8 snap-x snap-mandatory items-end justify-start lg:justify-center scrollbar-hide"
         >
           {PROJECTS.map((project, index) => {
             const variant = index === 2 ? "main" : (index === 1 || index === 3) ? "side" : "edge";

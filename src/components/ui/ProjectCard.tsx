@@ -1,5 +1,8 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "./Button";
 
@@ -17,9 +20,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   className,
 }) => {
   const sizeClasses = {
-    main: "w-[395px] h-[474px]",
-    side: "w-[295px] h-[402px]",
-    edge: "w-[237px] h-[323px]",
+    main: "w-[300px] lg:w-[395px] h-[400px] lg:h-[474px]",
+    side: "w-[260px] lg:w-[295px] h-[350px] lg:h-[402px]",
+    edge: "w-[220px] lg:w-[237px] h-[300px] lg:h-[323px]",
   };
 
   const bgClasses = {
@@ -29,13 +32,15 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   };
 
   const imageSizes = {
-    main: 308,
-    side: 260,
-    edge: 205,
+    main: 260,
+    side: 220,
+    edge: 175,
   };
 
   return (
-    <div
+    <motion.div
+      whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.2)" }}
+      transition={{ duration: 0.3 }}
       className={cn(
         "rounded-card overflow-hidden flex flex-col",
         sizeClasses[variant],
@@ -57,8 +62,8 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       <div className="flex flex-col items-center justify-center flex-1 p-4">
         <h3
           className={cn(
-            "font-black text-center mb-4",
-            variant === "main" ? "text-4xl text-black" : "text-2xl text-white"
+            "font-black text-center mb-3 lg:mb-4",
+            variant === "main" ? "text-2xl lg:text-4xl text-black" : "text-xl lg:text-2xl text-white"
           )}
         >
           {title}
@@ -71,6 +76,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
           Learn More
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 };

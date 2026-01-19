@@ -1,9 +1,10 @@
 "use client";
 
 import React from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Omit<HTMLMotionProps<"button">, "ref"> {
   variant?: "gold" | "white" | "black";
   size?: "sm" | "md" | "lg";
   children: React.ReactNode;
@@ -11,10 +12,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = "gold", size = "md", children, ...props }, ref) => {
-    const baseStyles = "font-bold rounded-button transition-all duration-300 inline-flex items-center justify-center";
+    const baseStyles = "font-bold rounded-button transition-all duration-300 inline-flex items-center justify-center cursor-pointer";
 
     const variants = {
-      gold: "gold-gradient text-white hover:opacity-90 hover:shadow-lg",
+      gold: "gold-gradient text-white hover:shadow-lg",
       white: "bg-white text-black hover:bg-gray-100",
       black: "bg-black text-white hover:bg-gray-900",
     };
@@ -26,13 +27,15 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     };
 
     return (
-      <button
+      <motion.button
         ref={ref}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
         className={cn(baseStyles, variants[variant], sizes[size], className)}
         {...props}
       >
         {children}
-      </button>
+      </motion.button>
     );
   }
 );
