@@ -9,70 +9,69 @@ interface ProjectCardProps {
   title: string;
   image: string;
   isActive?: boolean;
-  className?: string;
+  onClick?: () => void;
 }
 
 export const ProjectCard: React.FC<ProjectCardProps> = ({
   title,
   image,
   isActive = false,
-  className,
+  onClick,
 }) => {
   return (
     <motion.div
-      layout
+      data-carousel-item
+      onClick={onClick}
       animate={{
-        scale: isActive ? 1 : 0.9,
-        opacity: isActive ? 1 : 0.85,
+        scale: isActive ? 1 : 0.88,
+        opacity: isActive ? 1 : 0.7,
       }}
-      whileHover={{ scale: isActive ? 1.02 : 0.95, opacity: 1 }}
+      whileHover={{
+        scale: isActive ? 1.02 : 0.92,
+        opacity: 1,
+      }}
       transition={{
-        layout: { duration: 0.4, ease: "easeInOut" },
-        scale: { duration: 0.3 },
-        opacity: { duration: 0.3 }
+        type: "spring",
+        stiffness: 300,
+        damping: 25,
       }}
       className={cn(
-        // Base styles
-        "rounded-[24px] sm:rounded-[28px] lg:rounded-[30px]",
+        "rounded-[24px] sm:rounded-[30px]",
         "overflow-hidden flex flex-col",
-        "flex-shrink-0 transition-all duration-300",
-        "cursor-pointer",
+        "flex-shrink-0 cursor-pointer select-none",
+        "transition-colors duration-300",
 
-        // Size - Active is larger
-        isActive
-          ? "w-[280px] h-[380px] sm:w-[320px] sm:h-[420px] lg:w-[360px] lg:h-[460px]"
-          : "w-[220px] h-[320px] sm:w-[250px] sm:h-[360px] lg:w-[280px] lg:h-[400px]",
+        // Fixed base size
+        "w-[200px] sm:w-[240px] md:w-[260px] lg:w-[280px]",
+        "h-[280px] sm:h-[340px] md:h-[380px] lg:h-[400px]",
 
-        // Background - Active is white, others black
-        isActive
-          ? "bg-white shadow-2xl"
-          : "bg-black border border-white/10",
+        // Active: larger
+        isActive && "!w-[240px] sm:!w-[280px] md:!w-[320px] lg:!w-[360px]",
+        isActive && "!h-[340px] sm:!h-[400px] md:!h-[440px] lg:!h-[480px]",
 
-        className
+        // Background
+        isActive ? "bg-white shadow-2xl" : "bg-black/90 border border-white/20"
       )}
     >
       {/* Image */}
-      <div className={cn(
-        "relative w-full",
-        isActive ? "h-[55%]" : "h-[50%]"
-      )}>
+      <div className="relative w-full h-[55%]">
         <Image
           src={image}
           alt={title}
           fill
           className="object-cover"
-          sizes="(max-width: 640px) 280px, (max-width: 1024px) 320px, 360px"
+          sizes="(max-width: 640px) 240px, (max-width: 1024px) 320px, 360px"
         />
       </div>
 
       {/* Content */}
-      <div className="flex flex-col items-center justify-center flex-1 p-4 sm:p-5">
+      <div className="flex flex-col items-center justify-center flex-1 p-3 sm:p-4">
         <h3
           className={cn(
-            "font-black text-center mb-4 leading-tight",
+            "font-black text-center leading-tight mb-3 sm:mb-4",
             isActive
-              ? "text-xl sm:text-2xl lg:text-3xl text-black"
-              : "text-lg sm:text-xl lg:text-2xl text-white"
+              ? "text-lg sm:text-xl md:text-2xl lg:text-3xl text-black"
+              : "text-base sm:text-lg md:text-xl text-white"
           )}
         >
           {title}
@@ -86,13 +85,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
             document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" });
           }}
           className={cn(
-            "font-bold rounded-[20px] sm:rounded-[25px] transition-all",
-            "min-h-[40px] sm:min-h-[44px] lg:min-h-[48px]",
-            "px-5 sm:px-6 lg:px-8 py-2 sm:py-2.5",
-            "text-sm sm:text-base",
-            isActive
-              ? "gold-gradient text-white shadow-lg"
-              : "bg-white text-black hover:bg-gray-100"
+            "font-bold rounded-full",
+            "min-h-[36px] sm:min-h-[40px] md:min-h-[44px]",
+            "px-4 sm:px-5 md:px-6",
+            "text-xs sm:text-sm md:text-base",
+            isActive ? "gold-gradient text-white" : "bg-white text-black"
           )}
         >
           Learn More
