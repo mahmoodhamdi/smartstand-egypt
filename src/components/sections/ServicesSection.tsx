@@ -5,31 +5,60 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { cn } from "@/lib/utils";
-import { SERVICES } from "@/lib/constants";
 
-// Card variants for different positions
+const services = [
+  {
+    id: "1",
+    title: "Floorstands",
+    description: "Our floorstands are designed to provide an attractive and effective way to showcase products and attract customers' attention.",
+    icon: "/images/services/floorstands.webp",
+  },
+  {
+    id: "2",
+    title: "Booths",
+    description: "Our customized booth design and construction services create functional and visually appealing exhibition booths.",
+    icon: "/images/services/booths.webp",
+  },
+  {
+    id: "3",
+    title: "Lockers",
+    description: "Our lockers provide a safe and secure way for customers to store their belongings while shopping.",
+    icon: "/images/services/lockers.webp",
+  },
+  {
+    id: "4",
+    title: "Store Racks",
+    description: "Our store racks are designed to maximize space and enhance product visibility.",
+    icon: "/images/services/store-racks.webp",
+  },
+  {
+    id: "5",
+    title: "Countertops",
+    description: "Our countertops provide an attractive and functional space for product displays and customer service.",
+    icon: "/images/services/countertops.webp",
+  },
+];
+
 const cardVariants = ["edge", "side", "main", "side", "edge"] as const;
 
 export const ServicesSection: React.FC = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [activeIndex, setActiveIndex] = useState(2); // Start at center (main)
+  const [activeIndex, setActiveIndex] = useState(2);
 
-  // Update active index based on scroll position
   const handleScroll = useCallback(() => {
     if (!scrollRef.current) return;
 
     const container = scrollRef.current;
-    const containerCenter = container.scrollLeft + container.offsetWidth / 2;
+    const containerRect = container.getBoundingClientRect();
+    const containerCenter = containerRect.left + containerRect.width / 2;
 
-    const cards = container.querySelectorAll('[data-card-index]');
-    let closestIndex = 2;
+    let closestIndex = 0;
     let closestDistance = Infinity;
 
-    cards.forEach((card) => {
-      const cardElement = card as HTMLElement;
-      const index = parseInt(cardElement.dataset.cardIndex || "0");
-      const cardCenter = cardElement.offsetLeft + cardElement.offsetWidth / 2;
-      const distance = Math.abs(containerCenter - cardCenter);
+    Array.from(container.children).forEach((child, index) => {
+      const childRect = child.getBoundingClientRect();
+      const childCenter = childRect.left + childRect.width / 2;
+      const distance = Math.abs(containerCenter - childCenter);
 
       if (distance < closestDistance) {
         closestDistance = distance;
@@ -40,97 +69,84 @@ export const ServicesSection: React.FC = () => {
     setActiveIndex(closestIndex);
   }, []);
 
-  // Scroll to specific card
-  const scrollToCard = (index: number) => {
+  const scrollToCard = useCallback((index: number) => {
     if (!scrollRef.current) return;
 
     const container = scrollRef.current;
-    const card = container.querySelector(`[data-card-index="${index}"]`) as HTMLElement;
+    const child = container.children[index] as HTMLElement;
 
-    if (card) {
-      const containerCenter = container.offsetWidth / 2;
-      const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-      const scrollTo = cardCenter - containerCenter;
+    if (child) {
+      const containerWidth = container.offsetWidth;
+      const childOffsetLeft = child.offsetLeft;
+      const childWidth = child.offsetWidth;
+      const scrollPosition = childOffsetLeft - (containerWidth / 2) + (childWidth / 2);
 
-      container.scrollTo({ left: scrollTo, behavior: "smooth" });
+      container.scrollTo({
+        left: Math.max(0, scrollPosition),
+        behavior: "smooth",
+      });
     }
-  };
-
-  // Initial scroll to center
-  useEffect(() => {
-    const timer = setTimeout(() => scrollToCard(2), 100);
-    return () => clearTimeout(timer);
   }, []);
 
-  // Add scroll listener
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
 
     container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+
+    const timer = setTimeout(() => {
+      scrollToCard(2);
+    }, 300);
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
+  }, [handleScroll, scrollToCard]);
 
   return (
-    <section id="services" className="relative py-16 sm:py-20 lg:py-28 bg-[#0D0D0D] overflow-hidden">
-      {/* Background Shape */}
+    <section id="services" className="relative py-16 sm:py-20 lg:py-28 bg-black overflow-hidden">
+      {/* Background */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <Image
-          src="/images/shapes/main.svg"
-          alt=""
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 opacity-20 mix-blend-luminosity">
-          <Image
-            src="/images/shapes/vector1.svg"
-            alt=""
-            fill
-            className="object-cover"
-          />
-        </div>
+        <Image src="/images/shapes/main.svg" alt="" fill className="object-cover" />
       </div>
 
       <div className="relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-10 sm:mb-14 lg:mb-16 px-4"
+          className="text-center mb-10 sm:mb-14 px-4"
         >
           <h2 className="text-white font-black text-3xl sm:text-4xl md:text-5xl lg:text-6xl mb-3">
             Services
           </h2>
-          <p className="text-white/90 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="text-white/80 text-sm sm:text-base max-w-xl mx-auto">
             Smart Stand is a leading provider of a wide range of services
           </p>
         </motion.div>
 
-        {/* Cards Carousel */}
-        <div className="relative">
+        {/* Carousel */}
+        <div className="relative overflow-hidden">
           <div
             ref={scrollRef}
             className={cn(
               "flex items-end gap-4 sm:gap-5 lg:gap-6",
-              "overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory",
+              "overflow-x-auto scrollbar-hide scroll-smooth",
+              "snap-x snap-mandatory",
               "pb-8"
             )}
             style={{
-              paddingLeft: "max(1rem, calc(50vw - 700px))",
-              paddingRight: "max(1rem, calc(50vw - 700px))",
+              paddingLeft: "max(16px, calc(50vw - 600px))",
+              paddingRight: "max(16px, calc(50vw - 600px))",
             }}
           >
-            {SERVICES.slice(0, 5).map((service, index) => (
-              <motion.div
+            {services.map((service, index) => (
+              <div
                 key={service.id}
-                data-card-index={index}
                 className="snap-center flex-shrink-0"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <ServiceCard
                   title={service.title}
@@ -139,33 +155,27 @@ export const ServicesSection: React.FC = () => {
                   variant={cardVariants[index]}
                   isActive={activeIndex === index}
                 />
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
-        {/* Dot Indicators */}
-        <div className="flex justify-center gap-2 mt-6 sm:mt-8">
-          {SERVICES.slice(0, 5).map((_, index) => (
+        {/* Dots */}
+        <div className="flex justify-center gap-2 mt-6">
+          {services.map((_, index) => (
             <motion.button
               key={index}
               onClick={() => scrollToCard(index)}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
               className={cn(
-                "rounded-full transition-all duration-300 cursor-pointer min-w-[44px] min-h-[44px] flex items-center justify-center p-2",
+                "rounded-full transition-all duration-300 cursor-pointer",
+                index === activeIndex
+                  ? "w-8 h-3 gold-gradient"
+                  : "w-3 h-3 bg-white/40 hover:bg-white/60"
               )}
-              aria-label={`Go to slide ${index + 1}`}
-            >
-              <span
-                className={cn(
-                  "rounded-full block transition-all duration-300",
-                  index === activeIndex
-                    ? "w-6 sm:w-8 h-2.5 sm:h-3 gold-gradient"
-                    : "w-2.5 sm:w-3 h-2.5 sm:h-3 bg-white/40 hover:bg-white/60"
-                )}
-              />
-            </motion.button>
+              aria-label={`Go to service ${index + 1}`}
+            />
           ))}
         </div>
       </div>
