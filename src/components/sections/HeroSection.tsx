@@ -70,14 +70,23 @@ export const HeroSection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70" />
             </div>
 
-            {/* Desktop: Image on right side */}
+            {/* Desktop: Image on right side with smooth gradient edges */}
             <div className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 w-[55%] xl:w-[60%] h-[70%] xl:h-[80%]">
+              {/* Gradient mask overlay for smooth edges */}
+              <div className="absolute inset-0 z-10 pointer-events-none">
+                {/* Left edge fade */}
+                <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-black to-transparent" />
+                {/* Top edge fade */}
+                <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-black to-transparent" />
+                {/* Bottom edge fade */}
+                <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black to-transparent" />
+              </div>
               <Image
                 src={slides[currentSlide].image}
                 alt={slides[currentSlide].title}
                 fill
                 priority
-                className="object-contain object-right"
+                className="object-contain object-center"
                 sizes="60vw"
               />
             </div>

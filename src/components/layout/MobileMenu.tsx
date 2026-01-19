@@ -71,9 +71,9 @@ export const MobileMenu: React.FC = () => {
               className={cn(
                 "fixed top-0 right-0 h-full z-50",
                 "w-[280px] sm:w-[320px]",
-                "bg-black/95 backdrop-blur-md",
+                "bg-[#0D0D0D]", // Solid dark background - no transparency
                 "flex flex-col",
-                "shadow-2xl"
+                "shadow-2xl border-l border-[#906F1E]/20"
               )}
             >
               {/* Close Button */}
