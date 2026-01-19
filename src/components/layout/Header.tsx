@@ -40,7 +40,7 @@ export const Header: React.FC = () => {
           className="relative w-[180px] sm:w-[220px] lg:w-[294px] h-[35px] sm:h-[45px] lg:h-[57px]"
         >
           <Image
-            src="/images/logo/smart-stand-logo.webp"
+            src="/images/logo/logo-full.svg"
             alt="Smart Stand Egypt"
             fill
             className="object-contain"

@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -77,15 +76,8 @@ export const MobileMenu: React.FC = () => {
                 "shadow-2xl"
               )}
             >
-              {/* Header with Logo and Close Button */}
-              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/10">
-                <Image
-                  src="/images/logo/smart-stand-logo.webp"
-                  alt="Smart Stand Egypt"
-                  width={140}
-                  height={40}
-                  className="h-8 w-auto"
-                />
+              {/* Close Button */}
+              <div className="flex justify-end p-4 sm:p-6">
                 <motion.button
                   onClick={() => setIsOpen(false)}
                   whileHover={{ scale: 1.1 }}
