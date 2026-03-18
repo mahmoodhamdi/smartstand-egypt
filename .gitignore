@@ -41,3 +41,9 @@ yarn-error.log*
 next-env.d.ts
 .playwright-mcp/
 MCP_SERVERS_CONFIG.md
+CLAUDE.md
+CLAUDE_CODE_INSTRUCTIONS.md
+PHASE_*.md
+CHECKLIST.md
+PROGRESS.md
+.audit/
