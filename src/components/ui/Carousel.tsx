@@ -37,6 +37,25 @@ export const Carousel: React.FC<CarouselProps> = ({ children, className }) => {
     setActiveIndex(closestIndex);
   }, []);
 
+  // Scroll to specific index
+  const scrollToIndex = useCallback((index: number) => {
+    if (!scrollRef.current) return;
+
+    const container = scrollRef.current;
+    const child = container.children[index] as HTMLElement;
+
+    if (child) {
+      const containerCenter = container.offsetWidth / 2;
+      const childCenter = child.offsetLeft + child.offsetWidth / 2;
+      const scrollPosition = childCenter - containerCenter;
+
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   // Listen to scroll events
   useEffect(() => {
     const container = scrollRef.current;
@@ -65,26 +84,7 @@ export const Carousel: React.FC<CarouselProps> = ({ children, className }) => {
       clearTimeout(scrollTimeout);
       clearTimeout(initialTimeout);
     };
-  }, [updateActiveIndex, children.length]);
-
-  // Scroll to specific index
-  const scrollToIndex = (index: number) => {
-    if (!scrollRef.current) return;
-
-    const container = scrollRef.current;
-    const child = container.children[index] as HTMLElement;
-
-    if (child) {
-      const containerCenter = container.offsetWidth / 2;
-      const childCenter = child.offsetLeft + child.offsetWidth / 2;
-      const scrollPosition = childCenter - containerCenter;
-
-      container.scrollTo({
-        left: scrollPosition,
-        behavior: "smooth",
-      });
-    }
-  };
+  }, [updateActiveIndex, scrollToIndex, children.length]);
 
   // Handle dot click
   const handleDotClick = (index: number) => {
