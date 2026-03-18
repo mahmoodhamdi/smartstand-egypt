@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 import { HeroSection, AboutSection } from "@/components/sections";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 
 // Lazy load below-the-fold sections for better performance
 const ServicesSection = dynamic(
@@ -63,11 +64,21 @@ export default function Home() {
     <main className="min-h-screen">
       <HeroSection />
       <AboutSection />
-      <ServicesSection />
-      <CapabilitiesSection />
-      <ProjectsSection />
-      <PartnersSection />
-      <ContactSection />
+      <ErrorBoundary>
+        <ServicesSection />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <CapabilitiesSection />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ProjectsSection />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <PartnersSection />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ContactSection />
+      </ErrorBoundary>
     </main>
   );
 }

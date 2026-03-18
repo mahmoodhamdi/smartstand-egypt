@@ -12,3 +12,4 @@ export { SocialIcons } from "./SocialIcons";
 export { AnimatedSection } from "./AnimatedSection";
 export { SliderDots } from "./SliderDots";
 export { Carousel } from "./Carousel";
+export { ErrorBoundary } from "./ErrorBoundary";
