@@ -54,61 +54,9 @@ body {
   background-clip: text;
 }
 
-/* Alternative Gold Gradient - Horizontal */
-.gold-gradient-horizontal {
-  background: linear-gradient(90deg, #FBF7D3 0%, #906F1E 50%, #FBDD97 100%);
-}
-
-/* ============================================
-   SECTION BACKGROUNDS
-   ============================================ */
-
-/* Dark Section Background */
-.dark-section {
-  background-color: #0D0D0D;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Gold Shape Overlay for dark sections */
-.gold-shape-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, transparent 0%, rgba(144, 111, 30, 0.3) 50%, transparent 100%);
-  pointer-events: none;
-}
-
-/* Pattern Overlay */
-.pattern-overlay {
-  position: absolute;
-  inset: 0;
-  opacity: 0.15;
-  mix-blend-mode: luminosity;
-  pointer-events: none;
-}
-
-/* Section Pattern Background */
-.section-pattern {
-  position: relative;
-  overflow: hidden;
-}
-
-.section-pattern::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0.3;
-  mix-blend-mode: luminosity;
-}
-
 /* ============================================
    UTILITY CLASSES
    ============================================ */
-
-/* Text Shadow Utility */
-.text-shadow {
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
 
 /* Custom Border Radius */
 .rounded-card {
@@ -127,19 +75,6 @@ body {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
-}
-
-/* ============================================
-   SLIDER/CAROUSEL DOTS
-   ============================================ */
-
-.slider-dot {
-  transition: all 0.3s ease;
-}
-
-.slider-dot.active {
-  width: 32px;
-  background: linear-gradient(180deg, #FBF7D3 0%, #906F1E 50%, #FBDD97 100%);
 }
 
 /* ============================================
@@ -170,32 +105,3 @@ body {
   }
 }
 
-/* Smooth fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
-}
-
-/* Pulse animation for active elements */
-@keyframes pulse-gold {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(251, 221, 151, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(251, 221, 151, 0);
-  }
-}
-
-.pulse-gold {
-  animation: pulse-gold 2s ease-in-out infinite;
-}
