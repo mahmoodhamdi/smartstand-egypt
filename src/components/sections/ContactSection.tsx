@@ -5,32 +5,27 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { Mail, Phone, MapPin } from "lucide-react";
+import { CONTACT_EXTENDED, SOCIAL_LINKS } from "@/lib/constants";
 
 const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@smartstand-eg.com",
-    href: "mailto:info@smartstand-eg.com",
+    value: CONTACT_EXTENDED.emails[0],
+    href: `mailto:${CONTACT_EXTENDED.emails[0]}`,
   },
   {
     icon: Phone,
     label: "Phone",
-    value: "+20 155 555 0073",
-    href: "tel:+201555550073",
+    value: CONTACT_EXTENDED.phones[0].number,
+    href: CONTACT_EXTENDED.phones[0].link,
   },
   {
     icon: MapPin,
     label: "Address",
-    value: "Kamal Hassan Ali, Sheraton Al Matar\nEl Nozha, Cairo, Egypt",
-    href: "https://goo.gl/maps/Ve5q14VYzbRB7PWZ9",
+    value: `${CONTACT_EXTENDED.address.street}, ${CONTACT_EXTENDED.address.area}\n${CONTACT_EXTENDED.address.district}, ${CONTACT_EXTENDED.address.city}, ${CONTACT_EXTENDED.address.country}`,
+    href: CONTACT_EXTENDED.address.mapUrl,
   },
-];
-
-const socialLinks = [
-  { name: "Facebook", icon: "/images/icons/facebook.png", url: "https://facebook.com/smartstandegypt" },
-  { name: "Instagram", icon: "/images/icons/instagram.png", url: "https://instagram.com/smartstandegypt" },
-  { name: "LinkedIn", icon: "/images/icons/linkedin.png", url: "https://linkedin.com/company/smartstandegypt" },
 ];
 
 export const ContactSection: React.FC = () => {
@@ -119,20 +114,20 @@ export const ContactSection: React.FC = () => {
               viewport={{ once: true }}
               className="flex items-center gap-4 pt-4"
             >
-              {socialLinks.map((social) => (
+              {SOCIAL_LINKS.map((social) => (
                 <motion.a
-                  key={social.name}
+                  key={social.platform}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.15, y: -3 }}
                   whileTap={{ scale: 0.95 }}
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden shadow-lg transition-transform"
-                  aria-label={`Visit our ${social.name}`}
+                  aria-label={`Visit our ${social.platform}`}
                 >
                   <Image
                     src={social.icon}
-                    alt={social.name}
+                    alt={social.platform}
                     width={56}
                     height={56}
                     className="w-full h-full object-cover"
