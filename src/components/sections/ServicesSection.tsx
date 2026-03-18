@@ -6,43 +6,11 @@ import { motion } from "framer-motion";
 import { ServiceCard } from "@/components/ui/ServiceCard";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
-
-const services = [
-  {
-    id: "1",
-    title: "Floorstands",
-    description: "Our floorstands are designed to provide an attractive and effective way to showcase products.",
-    icon: "/images/services/floorstands.webp",
-  },
-  {
-    id: "2",
-    title: "Booths",
-    description: "Our customized booth design services create functional and visually appealing exhibition booths.",
-    icon: "/images/services/booths.webp",
-  },
-  {
-    id: "3",
-    title: "Lockers",
-    description: "Our lockers provide a safe and secure way for customers to store their belongings.",
-    icon: "/images/services/lockers.webp",
-  },
-  {
-    id: "4",
-    title: "Store Racks",
-    description: "Our store racks are designed to maximize space and enhance product visibility.",
-    icon: "/images/services/store-racks.webp",
-  },
-  {
-    id: "5",
-    title: "Countertops",
-    description: "Our countertops provide an attractive and functional space for product displays.",
-    icon: "/images/services/countertops.webp",
-  },
-];
+import { SERVICES } from "@/lib/constants";
 
 export const ServicesSection: React.FC = () => {
   const { scrollRef, activeIndex, scrollToIndex } = useCarousel({
-    itemCount: services.length,
+    itemCount: SERVICES.length,
     initialIndex: 2,
   });
 
@@ -85,7 +53,7 @@ export const ServicesSection: React.FC = () => {
               paddingRight: "max(1rem, calc(50vw - 600px))",
             }}
           >
-            {services.map((service, index) => (
+            {SERVICES.map((service, index) => (
               <div key={service.id} className="snap-center">
                 <ServiceCard
                   title={service.title}
@@ -101,7 +69,7 @@ export const ServicesSection: React.FC = () => {
 
         {/* Dots */}
         <div className="flex justify-center gap-2 mt-4 sm:mt-6">
-          {services.map((_, index) => (
+          {SERVICES.map((_, index) => (
             <motion.button
               key={index}
               onClick={() => scrollToIndex(index)}

@@ -3,29 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
-const partners = [
-  { id: "1", name: "LG", logo: "/images/partners/lg.webp" },
-  { id: "2", name: "Red Bull", logo: "/images/partners/redbull.webp" },
-  { id: "3", name: "Bosch", logo: "/images/partners/bosch.webp" },
-  { id: "4", name: "TCL", logo: "/images/partners/tcl.webp" },
-  { id: "5", name: "Panasonic", logo: "/images/partners/panasonic.webp" },
-  { id: "6", name: "Philips", logo: "/images/partners/philips.webp" },
-  { id: "7", name: "Nestle", logo: "/images/partners/nestle.webp" },
-  { id: "8", name: "L'Oreal", logo: "/images/partners/loreal.webp" },
-  { id: "9", name: "Shell", logo: "/images/partners/shell.webp" },
-  { id: "10", name: "Mobil", logo: "/images/partners/mobil.webp" },
-  { id: "11", name: "GE", logo: "/images/partners/ge.webp" },
-  { id: "12", name: "Hoover", logo: "/images/partners/hoover.webp" },
-  { id: "13", name: "La Germania", logo: "/images/partners/la-germania.webp" },
-  { id: "14", name: "Koldair", logo: "/images/partners/koldair.webp" },
-  { id: "15", name: "YOLO", logo: "/images/partners/yolo.webp" },
-  { id: "16", name: "Nova", logo: "/images/partners/nova.webp" },
-  { id: "17", name: "Othaim", logo: "/images/partners/othaim.webp" },
-  { id: "18", name: "Olive One", logo: "/images/partners/olive-one.webp" },
-  { id: "19", name: "Rowa", logo: "/images/partners/rowa.webp" },
-  { id: "20", name: "SAIB", logo: "/images/partners/saib.webp" },
-];
+import { PARTNERS } from "@/lib/constants";
 
 export const PartnersSection: React.FC = () => {
   return (
@@ -55,7 +33,7 @@ export const PartnersSection: React.FC = () => {
           viewport={{ once: true }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6 max-w-5xl mx-auto"
         >
-          {partners.map((partner, index) => (
+          {PARTNERS.map((partner, index) => (
             <motion.div
               key={partner.id}
               initial={{ opacity: 0, scale: 0.9 }}

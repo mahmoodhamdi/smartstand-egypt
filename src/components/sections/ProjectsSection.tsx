@@ -6,18 +6,11 @@ import { motion } from "framer-motion";
 import { ProjectCard } from "@/components/ui/ProjectCard";
 import { useCarousel } from "@/hooks/useCarousel";
 import { cn } from "@/lib/utils";
-
-const projects = [
-  { id: "1", title: "El Ezaby Pharmacy", image: "/images/projects/el-ezaby.webp" },
-  { id: "2", title: "Yolo Cosmetics", image: "/images/projects/yolo.webp" },
-  { id: "3", title: "LG Egypt", image: "/images/projects/lg.webp" },
-  { id: "4", title: "BOSCH", image: "/images/projects/bosch.webp" },
-  { id: "5", title: "Abdullah Al-Othaim Markets", image: "/images/projects/othaim.webp" },
-];
+import { PROJECTS } from "@/lib/constants";
 
 export const ProjectsSection: React.FC = () => {
   const { scrollRef, activeIndex, scrollToIndex } = useCarousel({
-    itemCount: projects.length,
+    itemCount: PROJECTS.length,
     initialIndex: 2,
   });
 
@@ -60,7 +53,7 @@ export const ProjectsSection: React.FC = () => {
               paddingRight: "max(1rem, calc(50vw - 600px))",
             }}
           >
-            {projects.map((project, index) => (
+            {PROJECTS.map((project, index) => (
               <div key={project.id} className="snap-center">
                 <ProjectCard
                   title={project.title}
@@ -75,7 +68,7 @@ export const ProjectsSection: React.FC = () => {
 
         {/* Dots */}
         <div className="flex justify-center gap-2 mt-4 sm:mt-6">
-          {projects.map((_, index) => (
+          {PROJECTS.map((_, index) => (
             <motion.button
               key={index}
               onClick={() => scrollToIndex(index)}
