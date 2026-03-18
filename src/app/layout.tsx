@@ -40,21 +40,12 @@ export const metadata: Metadata = {
     siteName: "Smart Stand Egypt",
     title: "Smart Stand Egypt - Marketing Solutions",
     description: "Pioneering marketing solutions for businesses across the globe.",
-    images: [
-      {
-        url: "/images/logo/Logo.svg",
-        width: 294,
-        height: 57,
-        alt: "Smart Stand Egypt Logo",
-      },
-    ],
   },
 
   twitter: {
     card: "summary_large_image",
     title: "Smart Stand Egypt - Marketing Solutions",
     description: "Pioneering marketing solutions for businesses across the globe.",
-    images: ["/images/logo/Logo.svg"],
   },
 
   robots: {
