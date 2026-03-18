@@ -108,8 +108,8 @@ export default function RootLayout({
               description: "Marketing solutions company in Egypt providing effective promotional strategies",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "88 Joseph Tito, 5th floor",
-                addressLocality: "Al nozha",
+                streetAddress: "Kamal Hassan Ali, Sheraton Al Matar",
+                addressLocality: "El Nozha",
                 addressRegion: "Cairo",
                 addressCountry: "EG",
               },
