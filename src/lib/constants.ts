@@ -180,7 +180,7 @@ export const SOCIAL_LINKS: SocialLink[] = [
 // ============================================
 export const ASSETS = {
   logo: {
-    full: "/images/logo/logo-full.svg",
+    full: "/images/logo/Logo.svg",
     icon: "/images/logo/logo-icon.svg",
   },
   hero: {
