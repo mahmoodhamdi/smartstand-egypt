@@ -4,6 +4,7 @@ import React, { useState, useId } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Loader2, Check, AlertCircle, Send } from "lucide-react";
+import { submitContactForm } from "@/app/actions/contact";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
@@ -15,20 +16,25 @@ export const ContactForm: React.FC = () => {
     message: "",
   });
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus("loading");
+    if (status === "loading") return;
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submitted:", formData);
+    setStatus("loading");
+    setErrorMessage("");
+
+    const result = await submitContactForm(formData);
+
+    if (result.success) {
       setStatus("success");
       setFormData({ name: "", email: "", message: "" });
-      setTimeout(() => setStatus("idle"), 3000);
-    } catch {
+      setTimeout(() => setStatus("idle"), 4000);
+    } else {
       setStatus("error");
-      setTimeout(() => setStatus("idle"), 3000);
+      setErrorMessage(result.error || "Something went wrong. Please try again.");
+      setTimeout(() => setStatus("idle"), 4000);
     }
   };
 
@@ -69,6 +75,8 @@ export const ContactForm: React.FC = () => {
             value={formData.name}
             onChange={handleChange}
             placeholder="Your name"
+            autoComplete="name"
+            maxLength={100}
             className={cn(
               "w-full bg-white/5 text-white text-base",
               "border-b-2 border-white/30 rounded-t-lg",
@@ -97,6 +105,8 @@ export const ContactForm: React.FC = () => {
             value={formData.email}
             onChange={handleChange}
             placeholder="your@email.com"
+            autoComplete="email"
+            maxLength={254}
             className={cn(
               "w-full bg-white/5 text-white text-base",
               "border-b-2 border-white/30 rounded-t-lg",
@@ -125,6 +135,7 @@ export const ContactForm: React.FC = () => {
             onChange={handleChange}
             placeholder="Tell us about your project..."
             rows={4}
+            maxLength={5000}
             className={cn(
               "w-full bg-white/5 text-white text-base",
               "border-b-2 border-white/30 rounded-t-lg",
@@ -134,9 +145,15 @@ export const ContactForm: React.FC = () => {
               "placeholder:text-white/40"
             )}
             required
+            minLength={10}
             disabled={status === "loading"}
           />
         </div>
+
+        {/* Error Message */}
+        {status === "error" && errorMessage && (
+          <p className="text-red-400 text-sm">{errorMessage}</p>
+        )}
 
         {/* Submit Button */}
         <motion.button
